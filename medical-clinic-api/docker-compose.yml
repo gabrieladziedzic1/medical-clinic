@@ -6,8 +6,10 @@ services:
     container_name: spring-boot-postgres
     environment:
       - POSTGRES_DB=medical_clinic_db
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+#      - POSTGRES_USER=postgres
+      - POSTGRES_USER=postgresql
+#      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PASSWORD=postgresql
     ports:
       - "5433:5432"
     volumes:
