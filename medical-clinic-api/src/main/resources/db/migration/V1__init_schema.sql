@@ -10,8 +10,8 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(100) UNIQUE NOT NULL,
     phone_number VARCHAR(20) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    is_active BOOLEAN DEFAULT TRUE
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    is_active BOOLEAN DEFAULT TRUE, NOT NULL
 );
 
 
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS equipment (
     id_equipment INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     room_id INT NOT NULL,
     equipment_name VARCHAR(50) NOT NULL,
-    internal_code VARCHAR(50) UNIQUE,
+    internal_code VARCHAR(50) UNIQUE NOT NULL,
     description TEXT,
     is_functional BOOLEAN DEFAULT TRUE NOT NULL,
 
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS doctor_schedules (
     day_of_week INT NOT NULL,
     start_time TIME NOT NULL,
     end_time TIME NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
 
     CONSTRAINT fk_doctor_schedule_doctor FOREIGN KEY (doctor_id) REFERENCES doctors(id_doctor),
     CONSTRAINT fk_doctor_schedule_room FOREIGN KEY (room_id) REFERENCES rooms(id_room),
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS doctor_absences (
     doctor_id INT NOT NULL,
     start_date TIMESTAMP NOT NULL,
     end_date TIMESTAMP NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
 
     CONSTRAINT fk_doctor_absence FOREIGN KEY (doctor_id) REFERENCES doctors(id_doctor),
     CONSTRAINT check_dates_absence CHECK (end_date > start_date)
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS appointments (
     start_date_time TIMESTAMP NOT NULL,
     end_date_time TIMESTAMP NOT NULL,
     note_medical TEXT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
 
     CONSTRAINT fk_appointment_doctor FOREIGN KEY (doctor_id) REFERENCES doctors(id_doctor),
     CONSTRAINT fk_appointment_room FOREIGN KEY (room_id) REFERENCES rooms(id_room),
