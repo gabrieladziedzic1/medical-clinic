@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  postgres-db:
+    image: postgres:15-alpine
+    container_name: spring-boot-postgres
+    environment:
+      - POSTGRES_DB=medical_clinic_db
+#      - POSTGRES_USER=postgres
+      - POSTGRES_USER=postgresql
+#      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PASSWORD=postgresql
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 9000:8080
+
+volumes:
+  postgres-data:

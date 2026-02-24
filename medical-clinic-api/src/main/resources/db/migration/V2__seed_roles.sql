@@ -1,0 +1,3 @@
+INSERT INTO roles (role_name)
+VALUES ('ADMIN'),('RECEPTIONIST'),('DOCTOR'),('PATIENT')
+ON CONFLICT (role_name) DO NOTHING;
